@@ -29,6 +29,7 @@
       background-size: 150px 150px;
       color: var(--text-light);
       transition: all 0.4s ease;
+      overflow: hidden; /* Disable scrolling */
     }
 
     body.dark-mode {
@@ -108,6 +109,17 @@
       0% { opacity: 0; transform: translateY(20px); }
       100% { opacity: 1; transform: translateY(0); }
     }
+
+    .logo {
+      width: 50px;
+      height: 50px;
+      margin-right: 10px;
+    }
+
+    .card h2 span {
+      font-size: 0.95em; /* Same size as other dates */
+      color: var(--accent); /* Inherit the same color as the university name */
+    }
   </style>
 </head>
 <body>
@@ -118,21 +130,21 @@
   <h1>Educational Attainment</h1>
 
   <div class="card">
-    <h2><i class="fa-solid fa-university"></i> University of the Cordilleras</h2>
-    <p>Bachelor of Science in Computer Science (August 2025 - Present)</p>
+    <h2><img src="UC.jpg" class="logo" alt="UC Logo"> University of the Cordilleras <span>(August 2025 - Present)</span></h2>
+    <p>Bachelor of Science in Computer Science</p>
   </div>
 
   <div class="card">
-    <h2><i class="fa-solid fa-graduation-cap"></i> STI College Baguio (2021–2023)</h2>
+    <h2><img src="sti.png" class="logo" alt="STI Logo"> STI College Baguio (2021–2023)</h2>
     <p>Accountancy, Business, Management</p>
   </div>
 
   <div class="card">
-    <h2><i class="fa-solid fa-school"></i> Baguio City National High School (2017–2021)</h2>
+    <h2><img src="bcnhs.png" class="logo" alt="Baguio City National High School Logo"> Baguio City National High School (2017–2021)</h2>
   </div>
 
   <div class="card">
-    <h2><i class="fa-solid fa-book"></i> Apolinario Mabini Elementary School (2011–2017)</h2>
+    <h2><img src="mabini.jpg" class="logo" alt="Apolinario Mabini Elementary School Logo"> Apolinario Mabini Elementary School (2011–2017)</h2>
   </div>
 
   <a class="back-btn" href="index.html"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
