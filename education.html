@@ -91,7 +91,8 @@
     .card li { list-style: none; padding-left: 20px; position: relative; }
     .card li::before { content: "\f058"; font-family: "Font Awesome 6 Free"; font-weight: 900; position: absolute; left: 0; color: var(--accent); }
 
-    .back-btn {
+    /* Button Style */
+    .next-btn {
       display: inline-block;
       margin-top: 20px;
       padding: 12px 25px;
@@ -99,11 +100,11 @@
       background: var(--gradient);
       color: #fff;
       text-decoration: none;
-      border-radius: 50px;
+      border-radius: 8px;
       transition: all 0.3s;
     }
 
-    .back-btn:hover { transform: scale(1.05); box-shadow: 0 0 15px var(--accent); }
+    .next-btn:hover { transform: scale(1.05); }
 
     @keyframes fadeUp {
       0% { opacity: 0; transform: translateY(20px); }
@@ -147,7 +148,8 @@
     <h2><img src="mabini.png" class="logo" alt="Apolinario Mabini Elementary School Logo"> Apolinario Mabini Elementary School (2011–2017)</h2>
   </div>
 
-  <a class="back-btn" href="index.html"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
+  <!-- Updated button to match Page 1 button style -->
+  <a class="next-btn" href="achievements.html">NEXT</a>
 </div>
 
 <script>
@@ -158,5 +160,3 @@
 
 </body>
 </html>
-
-
