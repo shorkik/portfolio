@@ -29,7 +29,7 @@
       background-size: 150px 150px;
       color: var(--text-light);
       transition: all 0.4s ease;
-      overflow: hidden; /* Disable scrolling */
+      overflow: hidden;
     }
 
     body.dark-mode {
@@ -88,13 +88,21 @@
     }
 
     .card p, .card li { font-size: 0.95em; margin: 5px 0; }
-    .card li { list-style: none; padding-left: 20px; position: relative; }
-    .card li::before { content: "\f058"; font-family: "Font Awesome 6 Free"; font-weight: 900; position: absolute; left: 0; color: var(--accent); }
 
-    /* Button Style */
-    .next-btn {
-      display: inline-block;
-      margin-top: 20px;
+    .logo {
+      width: 50px;
+      height: 50px;
+      margin-right: 10px;
+    }
+
+    /* BUTTONS */
+    .button-row {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 25px;
+    }
+
+    .nav-btn {
       padding: 12px 25px;
       font-size: 16px;
       background: var(--gradient);
@@ -104,25 +112,17 @@
       transition: all 0.3s;
     }
 
-    .next-btn:hover { transform: scale(1.05); }
+    .nav-btn:hover {
+      transform: scale(1.05);
+    }
 
     @keyframes fadeUp {
       0% { opacity: 0; transform: translateY(20px); }
       100% { opacity: 1; transform: translateY(0); }
     }
-
-    .logo {
-      width: 50px;
-      height: 50px;
-      margin-right: 10px;
-    }
-
-    .card h2 span {
-      font-size: 0.95em; /* Same size as other dates */
-      color: var(--accent); /* Inherit the same color as the university name */
-    }
   </style>
 </head>
+
 <body>
 
 <button class="dark-toggle" onclick="toggleDarkMode()">🌓</button>
@@ -131,25 +131,28 @@
   <h1>Educational Attainment</h1>
 
   <div class="card">
-    <h2><img src="uc.png" class="logo" alt="Uc Logo"> University of the Cordilleras <span>(August 2025 - Present)</span></h2>
+    <h2><img src="uc.png" class="logo"> University of the Cordilleras <span>(August 2025 - Present)</span></h2>
     <p>Bachelor of Science in Computer Science</p>
   </div>
 
   <div class="card">
-    <h2><img src="sti.png" class="logo" alt="STI Logo"> STI College Baguio (2021–2023)</h2>
+    <h2><img src="sti.png" class="logo"> STI College Baguio (2021–2023)</h2>
     <p>Accountancy, Business, Management</p>
   </div>
 
   <div class="card">
-    <h2><img src="bcnhs.png" class="logo" alt="Baguio City National High School Logo"> Baguio City National High School (2017–2021)</h2>
+    <h2><img src="bcnhs.png" class="logo"> Baguio City National High School (2017–2021)</h2>
   </div>
 
   <div class="card">
-    <h2><img src="mabini.png" class="logo" alt="Apolinario Mabini Elementary School Logo"> Apolinario Mabini Elementary School (2011–2017)</h2>
+    <h2><img src="mabini.png" class="logo"> Apolinario Mabini Elementary School (2011–2017)</h2>
   </div>
 
-  <!-- Updated button to match Page 1 button style -->
-  <a class="next-btn" href="achievements.html">NEXT</a>
+  <!-- BACK + NEXT BUTTONS -->
+  <div class="button-row">
+    <a class="nav-btn" href="index.html">BACK</a>
+    <a class="nav-btn" href="achievements.html">NEXT</a>
+  </div>
 </div>
 
 <script>
