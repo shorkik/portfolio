@@ -6,7 +6,6 @@
   <title>Achievements</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
   <style>
     :root {
       --bg-light: #f0f0f0;
@@ -30,6 +29,11 @@
       background-size: 150px 150px;
       color: var(--text-light);
       transition: all 0.4s ease;
+      display: flex;
+      justify-content: center; /* Center horizontally */
+      align-items: center; /* Center vertically */
+      height: 100vh; /* Full viewport height */
+      overflow: hidden; /* Prevent scrolling */
     }
 
     body.dark-mode {
@@ -55,82 +59,71 @@
 
     .container {
       max-width: 1000px;
-      margin: 50px auto;
-      padding: 20px;
+      margin: 0;
+      padding: 10px;
     }
 
     h1 {
       text-align: center;
       color: var(--accent);
-      margin-bottom: 30px;
-      font-size: 2.2em;
+      margin-bottom: 20px;
+    }
+
+    .grid {
+      display: flex;
+      justify-content: space-between;
+      gap: 25px; /* Increased gap */
+      flex-wrap: wrap; /* Allow wrapping on smaller screens */
+      justify-content: center; /* Center the items horizontally */
     }
 
     .card {
+      width: 30%; /* Increased width */
       background: var(--card-light);
       border-radius: 15px;
-      padding: 20px;
-      margin-bottom: 25px;
+      padding: 20px; /* Increased padding */
       box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-      transition: transform 0.3s, box-shadow 0.3s, background 0.4s;
-      animation: fadeUp 0.8s ease forwards;
+      text-align: center;
+      transition: background 0.4s;
     }
 
-    body.dark-mode .card { background: var(--card-dark); }
-
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    body.dark-mode .card {
+      background: var(--card-dark);
     }
 
-    .card h2 {
-      margin-top: 0;
-      color: var(--accent);
-      font-size: 1.3em;
+    .card img {
+      width: 100%;
+      height: 200px; /* Increased image size */
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 15px; /* Increased margin */
     }
 
-    .card ul {
-      padding-left: 20px;
-      margin: 10px 0;
+    .caption {
+      font-size: 1.2rem; /* Increased caption font size */
+      font-weight: 600;
     }
 
-    .card li {
-      margin: 8px 0;
-      position: relative;
-      list-style: none;
-      padding-left: 25px;
+    .button-row {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
     }
 
-    .card li::before {
-      content: "\f560";
-      font-family: "Font Awesome 6 Free";
-      font-weight: 900;
-      position: absolute;
-      left: 0;
-      color: var(--accent);
-    }
-
-    @keyframes fadeUp {
-      0% { opacity: 0; transform: translateY(20px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-
-    .home-btn {
-      display: inline-block;
-      margin-top: 25px;
+    .nav-btn {
       padding: 12px 25px;
       font-size: 16px;
       background: var(--gradient);
       color: #fff;
-      border-radius: 50px;
       text-decoration: none;
-      transition: 0.3s;
+      border-radius: 8px;
+      transition: all 0.3s;
     }
 
-    .home-btn:hover {
+    .nav-btn:hover {
       transform: scale(1.05);
-      box-shadow: 0 0 15px var(--accent);
     }
+
   </style>
 </head>
 
@@ -139,35 +132,38 @@
 <button class="dark-toggle" onclick="toggleDarkMode()">🌓</button>
 
 <div class="container">
+
   <h1>Achievements</h1>
 
-  <div class="card">
-    <h2>STI College Baguio</h2>
-    <ul>
-      <li>Grade 11 with honors</li>
-      <li>2nd Place – STI Global General Quiz Battle</li>
-      <li>Best Product Award – STI Baguio SHS Expo 2023</li>
-      <li>1st Place – Business Plan – STI Baguio SHS Expo 2023</li>
-    </ul>
+  <div class="grid">
+
+    <div class="card">
+      <img src="bball.png" alt="Basketball Achievement">
+      <p class="caption">Runner Up – 3v3 Basketball 18U Women’s Division</p>
+    </div>
+
+    <div class="card">
+      <img src="expo.png" alt="Expo Achievement">
+      <p class="caption">Best Product Award – STI College SHS Expo</p>
+    </div>
+
+    <div class="card">
+      <img src="expo1.png" alt="Expo Achievement 2">
+      <p class="caption">1st Place – STI College Business Plan</p>
+    </div>
+
+    <div class="card">
+      <img src="ssg.png" alt="Supreme Student Government">
+      <p class="caption">Baguio City National Highschool SSG Member Grade 7-9 Representative</p>
+    </div>
+
   </div>
 
-  <div class="card">
-    <h2>Baguio City National High School</h2>
-    <ul>
-      <li>7th Place – 3v3 Basketball (18U Women’s Division)</li>
-    </ul>
+  <div class="button-row">
+    <a class="nav-btn" href="education.html">BACK</a>
+    <a class="nav-btn" href="index.html">HOME</a>
   </div>
 
-  <div class="card">
-    <h2>Apolinario Mabini Elementary School</h2>
-    <ul>
-      <li>Graduated with honors</li>
-      <li>Member – Journalism Club</li>
-      <li>Youth Representative – Kabataan Council</li>
-    </ul>
-  </div>
-
-  <a href="index.html" class="home-btn"><i class="fa-solid fa-house"></i> Home</a>
 </div>
 
 <script>
