@@ -26,10 +26,15 @@
       margin: 0;
       padding: 0;
       background: var(--bg-light) var(--pattern-light);
-      background-size: 150px 150px;
+      background-size: 150px 150px; /* Restored the background pattern */
       color: var(--text-light);
       transition: all 0.4s ease;
-      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      height: 100vh;
+      text-align: left;
+      overflow: hidden; /* Prevent scrolling */
     }
 
     body.dark-mode {
@@ -37,42 +42,34 @@
       color: var(--text-dark);
     }
 
-    .dark-toggle {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: var(--accent);
-      color: #fff;
-      border: none;
-      padding: 10px 15px;
-      border-radius: 50px;
-      cursor: pointer;
-      z-index: 100;
-      transition: all 0.3s;
-    }
-
-    .dark-toggle:hover { background: var(--hover-accent); }
-
     .container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr); /* Two columns */
+      grid-gap: 10px; /* Reduced gap between cards */
       max-width: 1000px;
-      margin: 50px auto;
-      padding: 20px;
+      margin-top: 20px; /* Reduced top margin */
+      padding: 15px;
+      background: none; /* Removed background */
     }
 
     h1 {
       text-align: center;
       color: var(--accent);
-      margin-bottom: 30px;
+      font-size: 2rem; /* Reduced font size */
+      margin-bottom: 15px;
+      grid-column: span 2; /* Make the heading span both columns */
     }
 
     .card {
       background: var(--card-light);
       border-radius: 15px;
-      padding: 20px;
-      margin-bottom: 25px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-      transition: transform 0.3s, box-shadow 0.3s, background 0.4s;
-      animation: fadeUp 0.8s ease forwards;
+      padding: 15px; /* Reduced padding */
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 200px; /* Fixed height for cards */
     }
 
     body.dark-mode .card { background: var(--card-dark); }
@@ -80,31 +77,35 @@
     .card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.2); }
 
     .card h2 {
-      margin-top: 0;
       color: var(--accent);
-      display: flex;
-      align-items: center;
-      gap: 10px;
+      font-size: 1.3rem; /* Reduced heading font size */
+      margin-bottom: 8px;
+      text-align: center; /* Centered text for school name */
     }
 
-    .card p, .card li { font-size: 0.95em; margin: 5px 0; }
+    .card p {
+      font-size: 1rem; /* Smaller font size */
+      margin-bottom: 8px;
+      text-align: center; /* Centered text for degree/program */
+    }
 
     .logo {
-      width: 50px;
-      height: 50px;
-      margin-right: 10px;
+      width: 60px; /* Smaller logo size */
+      height: 60px;
+      align-self: center; /* Center logo */
+      margin-top: 10px; /* Reduced space between program and logo */
     }
 
-    /* BUTTONS */
     .button-row {
       display: flex;
       justify-content: space-between;
-      margin-top: 25px;
+      margin-top: 10px; /* Reduced space above buttons */
+      grid-column: span 2; /* Make buttons span both columns */
     }
 
     .nav-btn {
-      padding: 12px 25px;
-      font-size: 16px;
+      padding: 12px 18px; /* Smaller button size */
+      font-size: 14px; /* Smaller font size for buttons */
       background: var(--gradient);
       color: #fff;
       text-decoration: none;
@@ -116,39 +117,48 @@
       transform: scale(1.05);
     }
 
-    @keyframes fadeUp {
-      0% { opacity: 0; transform: translateY(20px); }
-      100% { opacity: 1; transform: translateY(0); }
+    /* Add responsiveness */
+    @media (max-width: 768px) {
+      .container {
+        grid-template-columns: 1fr; /* Stack cards in one column on small screens */
+      }
+
+      .card {
+        height: auto; /* Allow height to adjust for smaller screens */
+      }
     }
+
   </style>
 </head>
-
 <body>
-
-<button class="dark-toggle" onclick="toggleDarkMode()">🌓</button>
 
 <div class="container">
   <h1>Educational Attainment</h1>
 
   <div class="card">
-    <h2><img src="uc.png" class="logo"> University of the Cordilleras <span>(August 2025 - Present)</span></h2>
+    <img src="uc.png" class="logo">
+    <h2>University of the Cordilleras <span>(August 2025 - Present)</span></h2>
     <p>Bachelor of Science in Computer Science</p>
   </div>
 
   <div class="card">
-    <h2><img src="sti.png" class="logo"> STI College Baguio (2021–2023)</h2>
+    <img src="sti.png" class="logo">
+    <h2>STI College Baguio (2021–2023)</h2>
     <p>Accountancy, Business, Management</p>
   </div>
 
   <div class="card">
-    <h2><img src="bcnhs.png" class="logo"> Baguio City National High School (2017–2021)</h2>
+    <img src="bcnhs.png" class="logo">
+    <h2>Baguio City National High School (2017–2021)</h2>
+    <p></p>
   </div>
 
   <div class="card">
-    <h2><img src="mabini.png" class="logo"> Apolinario Mabini Elementary School (2011–2017)</h2>
+    <img src="mabini.png" class="logo">
+    <h2>Apolinario Mabini Elementary School (2011–2017)</h2>
+    <p></p>
   </div>
 
-  <!-- BACK + NEXT BUTTONS -->
   <div class="button-row">
     <a class="nav-btn" href="index.html">BACK</a>
     <a class="nav-btn" href="achievements.html">NEXT</a>
