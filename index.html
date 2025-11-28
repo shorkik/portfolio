@@ -29,7 +29,12 @@
       background-size: 150px 150px;
       color: var(--text-light);
       transition: all 0.4s ease;
-      overflow: hidden; /* 🚫 disables scrolling */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: left;
+      overflow: hidden; /* Prevent scrolling */
     }
 
     body.dark-mode {
@@ -37,27 +42,11 @@
       color: var(--text-dark);
     }
 
-    .dark-toggle {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: var(--accent);
-      color: #fff;
-      border: none;
-      padding: 10px 15px;
-      border-radius: 50px;
-      cursor: pointer;
-      z-index: 100;
-      transition: all 0.3s;
-    }
-
-    .dark-toggle:hover { background: var(--hover-accent); }
-
     .container {
       display: flex;
-      max-width: 1000px;
+      max-width: 1100px;
       margin: 50px auto;
-      padding: 20px;
+      padding: 30px;
       background: var(--card-light);
       border-radius: 15px;
       box-shadow: 0 10px 25px rgba(0,0,0,0.1);
@@ -67,65 +56,52 @@
     body.dark-mode .container { background: var(--card-dark); }
 
     .left {
-      width: 35%;
+      width: 40%;
       text-align: center;
-      padding-right: 20px;
-      border-right: 1px solid #ddd;
+      padding-right: 30px;
     }
 
     .left img {
-      width: 180px;
-      height: 180px;
+      width: 400px; /* Increased image size */
+      height: 400px; /* Increased image size */
       border-radius: 50%;
       object-fit: cover;
-      border: 3px solid #ddd;
-      margin-bottom: 20px;
-      transition: transform 0.3s;
+      border: 5px solid #ddd;
+      margin-bottom: 30px;
     }
 
-    .left img:hover { transform: scale(1.05); }
-
-    .contact, .skills, .hobbies {
-      margin-top: 20px;
+    .contact {
       text-align: left;
+      font-size: 1.1rem;
     }
 
-    .contact p, .skills li, .hobbies li {
-      background: #f7f7f7;
-      padding: 8px 10px;
-      border-radius: 5px;
-      margin-bottom: 8px;
-      transition: background 0.3s;
-    }
-
-    body.dark-mode .contact p, body.dark-mode .skills li, body.dark-mode .hobbies li {
-      background: #2a2a2a;
+    .contact p {
+      margin-bottom: 15px;
     }
 
     .right {
-      width: 65%;
-      padding-left: 20px;
+      width: 60%;
+      padding-left: 30px;
     }
 
     .right h2 {
-      margin-top: 0;
       color: var(--accent);
+      font-size: 2rem;
     }
 
     .right hr {
       border: none;
       border-top: 1px solid #ddd;
-      margin: 10px 0 20px 0;
-      transition: border-color 0.3s;
+      margin: 20px 0;
     }
 
     body.dark-mode .right hr { border-color: #444; }
 
     .next-btn {
       display: inline-block;
-      margin-top: 20px;
-      padding: 12px 25px;
-      font-size: 16px;
+      margin-top: 30px;
+      padding: 15px 30px;
+      font-size: 18px;
       background: var(--gradient);
       color: #fff;
       text-decoration: none;
@@ -133,7 +109,7 @@
       transition: all 0.3s;
     }
 
-    .next-btn:hover { transform: scale(1.05); }
+    .next-btn:hover { transform: scale(1.1); }
 
     ul { padding-left: 20px; }
 
@@ -147,8 +123,6 @@
 </head>
 <body>
 
-<button class="dark-toggle" onclick="toggleDarkMode()">🌓</button>
-
 <div class="container">
   <div class="left">
     <img src="me.png" alt="My Picture">
@@ -158,32 +132,13 @@
       <p>Email: hannahmaesumayo@gmail.com</p>
       <p>Phone: 0966 248 7348</p>
     </div>
-
-    <div class="skills">
-      <h3>Skill Set</h3>
-      <ul>
-        <li>Basic coding using Java</li>
-        <li>Basic computer troubleshooting</li>
-      </ul>
-    </div>
-
-    <div class="hobbies">
-      <h3>Hobbies</h3>
-      <ul>
-        <li>Playing video games</li>
-        <li>Coming-of-age films</li>
-        <li>Music (guitar and listening)</li>
-        <li>Basketball</li>
-        <li>Caring for animals, especially cats</li>
-      </ul>
-    </div>
   </div>
 
   <div class="right">
     <h2>About Me</h2>
     <hr>
     <p>
-      Hi! I’m <strong>Janna</strong>, a 21-year-old from <strong>Baguio City</strong> who loves exploring how things work especially computers. I like tinkering with both hardware and software, finding satisfaction in solving even small tech problems. I’m proud of my Kapampangan background, and I think it inspires my sense of creativity and determination. I’m always eager to learn more, take on new challenges, and keep improving in everything I do.
+      Hi! I’m <strong>Janna</strong>, a 21-year-old from <strong>Baguio City</strong> who loves exploring how things work, especially computers. I like tinkering with both hardware and software, finding satisfaction in solving even small tech problems. I’m proud of my Kapampangan background, and I think it inspires my sense of creativity and determination. I’m always eager to learn more, take on new challenges, and keep improving in everything I do.
     </p>
 
     <h2>Biography</h2>
