@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Family</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      --bg-light: #f0f0f0;
+      --bg-dark: #121212;
+      --card-light: #fff;
+      --card-dark: #1e1e1e;
+      --text-light: #333;
+      --text-dark: #f0f0f0;
+      --accent: #0070f3;
+      --hover-accent: #005bb5;
+      --gradient: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+      --pattern-light: url('data:image/svg+xml;utf8,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="2" height="100" fill="%23cccccc"/><rect x="0" y="0" width="100" height="2" fill="%23cccccc"/><circle cx="25" cy="25" r="2" fill="%23cccccc"/><circle cx="75" cy="75" r="2" fill="%23cccccc"/></svg>');
+      --pattern-dark: url('data:image/svg+xml;utf8,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="2" height="100" fill="%23333"/><rect x="0" y="0" width="100" height="2" fill="%23333"/><circle cx="25" cy="25" r="2" fill="%23333"/><circle cx="75" cy="75" r="2" fill="%23333"/></svg>');
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: var(--bg-light) var(--pattern-light);
+      background-size: 150px 150px;
+      color: var(--text-light);
+      transition: all 0.4s ease;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      height: 100vh;
+      text-align: left;
+      padding-left: 5%; /* Added space to the left */
+      padding-right: 5%; /* Added space to the right */
+      overflow: hidden; /* Prevent scrolling */
+    }
+
+    body.dark-mode {
+      background: var(--bg-dark) var(--pattern-dark);
+      color: var(--text-dark);
+    }
+
+    .dark-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 50px;
+      cursor: pointer;
+      z-index: 100;
+      transition: all 0.3s;
+    }
+
+    .dark-toggle:hover { background: var(--hover-accent); }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 90%; /* Increased width */
+      padding: 40px; /* Increased padding inside container */
+    }
+
+    h1 {
+      color: var(--accent);
+      font-size: 2.4rem; /* Increased title size */
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .grid {
+      display: flex;
+      justify-content: space-between;
+      gap: 30px; /* Increased gap between cards */
+      width: 100%;
+      max-width: 1200px; /* Increased max-width */
+      margin-bottom: 40px; /* Increased space between cards and buttons */
+    }
+
+    .card {
+      background: var(--card-light);
+      border-radius: 15px;
+      padding: 30px; /* Increased padding */
+      box-shadow: 0 12px 35px rgba(0,0,0,0.2); /* Stronger shadow */
+      width: 24%; /* Increased width of each card */
+      transition: transform 0.3s, box-shadow 0.3s;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      text-align: center;
+    }
+
+    body.dark-mode .card { background: var(--card-dark); }
+
+    .card:hover {
+      transform: translateY(-7px);
+      box-shadow: 0 18px 45px rgba(0,0,0,0.3);
+    }
+
+    .card h2 {
+      color: var(--accent);
+      font-size: 1.3rem; /* Decreased card title size */
+      margin-bottom: 12px;
+    }
+
+    .card p {
+      font-size: 1.1rem; /* Decreased card text size */
+      margin-bottom: 25px;
+    }
+
+    .family-photo {
+      width: 100%;
+      height: auto;
+      max-height: 250px;
+      margin-bottom: 20px;
+      align-self: center;
+      object-fit: cover;
+    }
+
+    .button-row {
+      display: flex;
+      justify-content: space-around;
+      width: 100%;
+      max-width: 600px;
+      margin-top: 30px; /* Moved buttons slightly upward */
+    }
+
+    .nav-btn {
+      padding: 14px 24px;
+      font-size: 18px;
+      background: var(--gradient);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: all 0.3s;
+    }
+
+    .nav-btn:hover {
+      transform: scale(1.05);
+    }
+
+    /* Responsiveness */
+    @media (max-width: 768px) {
+      .grid {
+        flex-direction: column;
+        gap: 20px;
+        width: 100%;
+      }
+
+      .card {
+        width: 100%; /* Stack cards vertically on small screens */
+      }
+
+      .container {
+        padding: 20px; /* Reduced padding on smaller screens */
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+<button class="dark-toggle" onclick="toggleDarkMode()">🌓</button>
+
+<div class="container">
+  <h1>Family</h1>
+
+  <div class="grid">
+    <!-- MOM -->
+    <div class="card">
+      <img src="mom.png" class="family-photo">
+      <h2>Marissa Navarro</h2>
+      <p>This is my mom, a single parent who raised me and my sister alone. I am always thankful for her love and for being our strongest support.</p>
+    </div>
+
+    <!-- DAD -->
+    <div class="card">
+      <img src="dad.png" class="family-photo">
+      <h2>Victor Sumayo Jr.</h2>
+      <p>Although my father wasn't present throughout my life, I'm still thankful that he gave me life.</p>
+    </div>
+
+    <!-- SIBLING -->
+    <div class="card">
+      <img src="sibling.png" class="family-photo">
+      <h2>Rovic Red Navarro</h2>
+      <p>My sister and I have always been close. She is my shoulder to cry on, and she supports me in everything.</p>
+    </div>
+  </div>
+
+  <!-- NAV BUTTONS -->
+  <div class="button-row">
+    <a class="nav-btn" href="achievements.html">BACK</a> <!-- "Back" Button -->
+    <a class="nav-btn" href="citcs1d.html">NEXT</a> <!-- "Next" Button -->
+  </div>
+</div>
+
+<script>
+  function toggleDarkMode() {
+    document.body.classList.toggle("dark-mode");
+  }
+</script>
+
+</body>
+</html>
