@@ -20,142 +20,340 @@
       --pattern-light: url('data:image/svg+xml;utf8,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="2" height="100" fill="%23cccccc"/><rect x="0" y="0" width="100" height="2" fill="%23cccccc"/><circle cx="25" cy="25" r="2" fill="%23cccccc"/><circle cx="75" cy="75" r="2" fill="%23cccccc"/></svg>');
       --pattern-dark: url('data:image/svg+xml;utf8,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="2" height="100" fill="%23333"/><rect x="0" y="0" width="100" height="2" fill="%23333"/><circle cx="25" cy="25" r="2" fill="%23333"/><circle cx="75" cy="75" r="2" fill="%23333"/></svg>');
     }
-
-    body {
-      font-family: 'Roboto', sans-serif;
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+    }
+    html, body {
+      height: 100vh;
+      overflow: hidden;
+    }
+    body {
+      font-family: 'Roboto', sans-serif;
       background: var(--bg-light) var(--pattern-light);
       background-size: 150px 150px;
       color: var(--text-light);
       transition: all 0.4s ease;
       display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      text-align: left;
-      overflow: hidden; /* Prevent scrolling */
+      flex-direction: column;
     }
-
     body.dark-mode {
       background: var(--bg-dark) var(--pattern-dark);
       color: var(--text-dark);
     }
-
+    .navbar {
+      height: 60px;
+      flex-shrink: 0;
+      background: var(--card-light);
+      padding: 0 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      transition: all 0.4s ease;
+    }
+    body.dark-mode .navbar {
+      background: var(--card-dark);
+    }
+    .nav-links {
+      display: flex;
+      gap: 25px;
+      align-items: center;
+    }
+    .nav-links a {
+      color: var(--text-light);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+      font-size: 1rem;
+      white-space: nowrap;
+    }
+    body.dark-mode .nav-links a {
+      color: var(--text-dark);
+    }
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+    .nav-links a.active {
+      color: var(--accent);
+      font-weight: 700;
+    }
+    .dark-toggle {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 1.2rem;
+    }
+    .dark-toggle:hover {
+      background: var(--hover-accent);
+      transform: scale(1.05);
+    }
+    .main-content {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 25px;
+      min-height: 0;
+      position: relative;
+    }
     .container {
       display: flex;
-      max-width: 1100px;
-      margin: 50px auto;
-      padding: 30px;
+      width: 100%;
+      max-width: 1600px;
+      height: 100%;
       background: var(--card-light);
-      border-radius: 15px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      border-radius: 20px;
+      box-shadow: 0 10px 35px rgba(0,0,0,0.15);
       transition: background 0.4s;
+      overflow: hidden;
+      position: relative;
     }
-
-    body.dark-mode .container { background: var(--card-dark); }
-
+    body.dark-mode .container {
+      background: var(--card-dark);
+    }
     .left {
       width: 40%;
-      text-align: center;
-      padding-right: 30px;
+      padding: 50px 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border-right: 2px solid rgba(0,0,0,0.1);
     }
-
+    body.dark-mode .left {
+      border-right: 2px solid rgba(255,255,255,0.1);
+    }
     .left img {
-      width: 400px; /* Increased image size */
-      height: 400px; /* Increased image size */
+      width: 320px;
+      height: 320px;
       border-radius: 50%;
       object-fit: cover;
-      border: 5px solid #ddd;
-      margin-bottom: 30px;
+      border: 6px solid var(--accent);
+      margin-bottom: 35px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+      transition: transform 0.3s;
     }
-
+    .left img:hover {
+      transform: scale(1.05);
+    }
     .contact {
       text-align: left;
+      width: 100%;
+    }
+    .contact h3 {
+      color: var(--accent);
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+    }
+    .contact p {
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
       font-size: 1.1rem;
     }
-
-    .contact p {
-      margin-bottom: 15px;
+    .contact i {
+      color: var(--accent);
+      width: 24px;
+      font-size: 1.2rem;
     }
-
     .right {
       width: 60%;
-      padding-left: 30px;
+      padding: 50px 60px 100px 60px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
     }
-
+    .content-wrapper {
+      flex: 1;
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding-right: 15px;
+    }
+    .content-wrapper::-webkit-scrollbar {
+      width: 8px;
+    }
+    .content-wrapper::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .content-wrapper::-webkit-scrollbar-thumb {
+      background: var(--accent);
+      border-radius: 10px;
+    }
     .right h2 {
       color: var(--accent);
-      font-size: 2rem;
+      font-size: 2.5rem;
+      margin-bottom: 15px;
     }
-
     .right hr {
       border: none;
-      border-top: 1px solid #ddd;
-      margin: 20px 0;
+      border-top: 3px solid var(--accent);
+      margin-bottom: 25px;
+      opacity: 0.4;
     }
-
-    body.dark-mode .right hr { border-color: #444; }
-
-    .next-btn {
-      display: inline-block;
-      margin-top: 30px;
-      padding: 15px 30px;
-      font-size: 18px;
+    .right p {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      margin-bottom: 35px;
+    }
+    .button-container {
+      position: absolute;
+      bottom: 30px;
+      right: 30px;
+      display: flex;
+      gap: 15px;
+      z-index: 10;
+    }
+    .nav-btn {
+      padding: 16px 35px;
+      font-size: 16px;
+      font-weight: 700;
       background: var(--gradient);
       color: #fff;
       text-decoration: none;
-      border-radius: 8px;
+      border-radius: 10px;
       transition: all 0.3s;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      white-space: nowrap;
     }
-
-    .next-btn:hover { transform: scale(1.1); }
-
-    ul { padding-left: 20px; }
-
-    @keyframes fadeIn {
-      0% { opacity: 0; transform: translateY(20px); }
-      100% { opacity: 1; transform: translateY(0); }
+    .nav-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
     }
-
-    .left, .right { animation: fadeIn 0.8s ease forwards; }
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    @keyframes fadeInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    .left {
+      animation: fadeInLeft 0.7s ease forwards;
+    }
+    .right {
+      animation: fadeInUp 0.7s ease forwards;
+      animation-delay: 0.15s;
+      opacity: 0;
+    }
+    .button-container {
+      animation: fadeInUp 0.7s ease forwards;
+      animation-delay: 0.3s;
+      opacity: 0;
+    }
+    @media (max-height: 700px) {
+      .navbar {
+        height: 55px;
+      }
+      .left img {
+        width: 220px;
+        height: 220px;
+      }
+      .right h2 {
+        font-size: 2rem;
+      }
+      .right p {
+        font-size: 1rem;
+      }
+      .nav-btn {
+        padding: 12px 25px;
+        font-size: 14px;
+      }
+    }
+    @media (max-width: 968px) {
+      .container {
+        flex-direction: column;
+      }
+      .left, .right {
+        width: 100%;
+        border: none;
+      }
+      .left {
+        padding: 30px;
+      }
+      .left img {
+        width: 200px;
+        height: 200px;
+      }
+      .right {
+        padding: 30px 30px 90px 30px;
+      }
+    }
   </style>
 </head>
 <body>
-
-<div class="container">
-  <div class="left">
-    <img src="me.png" alt="My Picture">
-
-    <div class="contact">
-      <h3>Get in touch</h3>
-      <p>Email: hannahmaesumayo@gmail.com</p>
-      <p>Phone: 0966 248 7348</p>
+<nav class="navbar">
+  <div class="nav-links">
+    <a href="index.html" class="active">About</a>
+    <a href="education.html">Education</a>
+    <a href="achievements.html">Achievements</a>
+    <a href="family.html">Family</a>
+    <a href="citcs1d.html">CITCS 1D-B</a>
+  </div>
+  <button class="dark-toggle" onclick="toggleDarkMode()">🌓</button>
+</nav>
+<div class="main-content">
+  <div class="container">
+    <div class="left">
+      <img src="me.png" alt="My Picture">
+      <div class="contact">
+        <h3>Get in touch</h3>
+        <p><i class="fas fa-envelope"></i> hannahmaesumayo@gmail.com</p>
+        <p><i class="fas fa-phone"></i> 0966 248 7348</p>
+      </div>
+    </div>
+    <div class="right">
+      <div class="content-wrapper">
+        <div>
+          <h2>About Me</h2>
+          <hr>
+          <p>
+            Hi! I'm <strong>Janna</strong>, a 21-year-old from <strong>Baguio City</strong> who loves exploring how things work, especially computers. I like tinkering with both hardware and software, finding satisfaction in solving even small tech problems. I'm proud of my Kapampangan background, and I think it inspires my sense of creativity and determination. I'm always eager to learn more, take on new challenges, and keep improving in everything I do.
+          </p>
+        </div>
+        <div>
+          <h2>Biography</h2>
+          <hr>
+          <p>
+            <strong>Hannah Mae Sumayo</strong>, known to her friends as <strong>Janna</strong>, was born on <strong>March 31, 2004</strong>, and grew up in <strong>Baguio City</strong>, where she still lives today. She has a growing passion for technology and enjoys working with computers, from fixing hardware to solving software problems. Her curiosity and patience drive her to keep learning new skills and improving her craft.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="button-container">
+      <a class="nav-btn" href="education.html">NEXT <i class="fas fa-arrow-right"></i></a>
     </div>
   </div>
-
-  <div class="right">
-    <h2>About Me</h2>
-    <hr>
-    <p>
-      Hi! I’m <strong>Janna</strong>, a 21-year-old from <strong>Baguio City</strong> who loves exploring how things work, especially computers. I like tinkering with both hardware and software, finding satisfaction in solving even small tech problems. I’m proud of my Kapampangan background, and I think it inspires my sense of creativity and determination. I’m always eager to learn more, take on new challenges, and keep improving in everything I do.
-    </p>
-
-    <h2>Biography</h2>
-    <hr>
-    <p>
-      <strong>Hannah Mae Sumayo</strong>, known to her friends as <strong>Janna</strong>, was born on <strong>March 31, 2004</strong>, and grew up in <strong>Baguio City</strong>, where she still lives today. She has a growing passion for technology and enjoys working with computers, from fixing hardware to solving software problems. Her curiosity and patience drive her to keep learning new skills and improving her craft.
-    </p>
-
-    <a class="next-btn" href="education.html">NEXT</a>
-  </div>
 </div>
-
 <script>
-function toggleDarkMode() {
-  document.body.classList.toggle("dark-mode");
-}
+  function toggleDarkMode() {
+    document.body.classList.toggle("dark-mode");
+    localStorage.setItem("darkMode", document.body.classList.contains("dark-mode"));
+  }
+  if (localStorage.getItem("darkMode") === "true") {
+    document.body.classList.add("dark-mode");
+  }
 </script>
-
 </body>
 </html>
