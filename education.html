@@ -20,157 +20,293 @@
       --pattern-light: url('data:image/svg+xml;utf8,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="2" height="100" fill="%23cccccc"/><rect x="0" y="0" width="100" height="2" fill="%23cccccc"/><circle cx="25" cy="25" r="2" fill="%23cccccc"/><circle cx="75" cy="75" r="2" fill="%23cccccc"/></svg>');
       --pattern-dark: url('data:image/svg+xml;utf8,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="2" height="100" fill="%23333"/><rect x="0" y="0" width="100" height="2" fill="%23333"/><circle cx="25" cy="25" r="2" fill="%23333"/><circle cx="75" cy="75" r="2" fill="%23333"/></svg>');
     }
-
-    body {
-      font-family: 'Roboto', sans-serif;
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+    }
+    html, body {
+      height: 100vh;
+      overflow: hidden;
+    }
+    body {
+      font-family: 'Roboto', sans-serif;
       background: var(--bg-light) var(--pattern-light);
-      background-size: 150px 150px; /* Restored the background pattern */
+      background-size: 150px 150px;
       color: var(--text-light);
       transition: all 0.4s ease;
       display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      height: 100vh;
-      text-align: left;
-      overflow: hidden; /* Prevent scrolling */
+      flex-direction: column;
     }
-
     body.dark-mode {
       background: var(--bg-dark) var(--pattern-dark);
       color: var(--text-dark);
     }
-
-    .container {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr); /* Two columns */
-      grid-gap: 10px; /* Reduced gap between cards */
-      max-width: 1000px;
-      margin-top: 20px; /* Reduced top margin */
-      padding: 15px;
-      background: none; /* Removed background */
+    .navbar {
+      height: 60px;
+      flex-shrink: 0;
+      background: var(--card-light);
+      padding: 0 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      transition: all 0.4s ease;
     }
-
+    body.dark-mode .navbar {
+      background: var(--card-dark);
+    }
+    .nav-links {
+      display: flex;
+      gap: 25px;
+      align-items: center;
+    }
+    .nav-links a {
+      color: var(--text-light);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+      font-size: 1rem;
+      white-space: nowrap;
+    }
+    body.dark-mode .nav-links a {
+      color: var(--text-dark);
+    }
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+    .nav-links a.active {
+      color: var(--accent);
+      font-weight: 700;
+    }
+    .dark-toggle {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 1.2rem;
+    }
+    .dark-toggle:hover {
+      background: var(--hover-accent);
+      transform: scale(1.05);
+    }
+    .main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 30px 40px;
+      min-height: 0;
+      position: relative;
+    }
     h1 {
       text-align: center;
       color: var(--accent);
-      font-size: 2rem; /* Reduced font size */
-      margin-bottom: 15px;
-      grid-column: span 2; /* Make the heading span both columns */
+      font-size: 3rem;
+      margin-bottom: 40px;
+      text-shadow: 0 3px 6px rgba(0,0,0,0.15);
     }
-
+    .container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 35px;
+      max-width: 1500px;
+      width: 100%;
+      flex: 1;
+      min-height: 0;
+    }
     .card {
       background: var(--card-light);
-      border-radius: 15px;
-      padding: 15px; /* Reduced padding */
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      border-radius: 20px;
+      padding: 40px 30px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.12);
       transition: transform 0.3s, box-shadow 0.3s;
       display: flex;
       flex-direction: column;
+      align-items: center;
       justify-content: space-between;
-      height: 200px; /* Fixed height for cards */
+      text-align: center;
     }
-
-    body.dark-mode .card { background: var(--card-dark); }
-
-    .card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.2); }
-
+    body.dark-mode .card {
+      background: var(--card-dark);
+    }
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+    }
+    .logo {
+      width: 100px;
+      height: 100px;
+      object-fit: contain;
+      margin-bottom: 25px;
+      transition: transform 0.3s;
+    }
+    .card:hover .logo {
+      transform: scale(1.15);
+    }
     .card h2 {
       color: var(--accent);
-      font-size: 1.3rem; /* Reduced heading font size */
-      margin-bottom: 8px;
-      text-align: center; /* Centered text for school name */
+      font-size: 1.4rem;
+      margin-bottom: 15px;
+      line-height: 1.4;
     }
-
+    .card h2 span {
+      font-size: 1.1rem;
+      color: var(--text-light);
+      font-weight: 400;
+      display: block;
+      margin-top: 8px;
+    }
+    body.dark-mode .card h2 span {
+      color: var(--text-dark);
+    }
     .card p {
-      font-size: 1rem; /* Smaller font size */
-      margin-bottom: 8px;
-      text-align: center; /* Centered text for degree/program */
+      font-size: 1.15rem;
+      color: var(--text-light);
+      margin-top: auto;
     }
-
-    .logo {
-      width: 60px; /* Smaller logo size */
-      height: 60px;
-      align-self: center; /* Center logo */
-      margin-top: 10px; /* Reduced space between program and logo */
+    body.dark-mode .card p {
+      color: var(--text-dark);
     }
-
-    .button-row {
+    .button-container {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
       display: flex;
-      justify-content: space-between;
-      margin-top: 10px; /* Reduced space above buttons */
-      grid-column: span 2; /* Make buttons span both columns */
+      gap: 15px;
+      z-index: 100;
     }
-
     .nav-btn {
-      padding: 12px 18px; /* Smaller button size */
-      font-size: 14px; /* Smaller font size for buttons */
+      padding: 16px 35px;
+      font-size: 16px;
+      font-weight: 700;
       background: var(--gradient);
       color: #fff;
       text-decoration: none;
-      border-radius: 8px;
+      border-radius: 10px;
       transition: all 0.3s;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      white-space: nowrap;
     }
-
     .nav-btn:hover {
-      transform: scale(1.05);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
     }
-
-    /* Add responsiveness */
-    @media (max-width: 768px) {
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    h1 {
+      animation: fadeInUp 0.5s ease forwards;
+    }
+    .card {
+      animation: fadeInUp 0.7s ease forwards;
+      opacity: 0;
+    }
+    .card:nth-child(1) { animation-delay: 0.1s; }
+    .card:nth-child(2) { animation-delay: 0.15s; }
+    .card:nth-child(3) { animation-delay: 0.2s; }
+    .card:nth-child(4) { animation-delay: 0.25s; }
+    .button-container {
+      animation: fadeInUp 0.7s ease forwards;
+      animation-delay: 0.3s;
+      opacity: 0;
+    }
+    @media (max-height: 700px) {
+      .navbar {
+        height: 55px;
+      }
+      h1 {
+        font-size: 2.2rem;
+        margin-bottom: 30px;
+      }
       .container {
-        grid-template-columns: 1fr; /* Stack cards in one column on small screens */
+        gap: 25px;
       }
-
       .card {
-        height: auto; /* Allow height to adjust for smaller screens */
+        padding: 25px 20px;
+      }
+      .logo {
+        width: 70px;
+        height: 70px;
+      }
+      .card h2 {
+        font-size: 1.1rem;
+      }
+      .nav-btn {
+        padding: 12px 25px;
+        font-size: 14px;
       }
     }
-
+    @media (max-width: 968px) {
+      .container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+    }
   </style>
 </head>
 <body>
-
-<div class="container">
+<nav class="navbar">
+  <div class="nav-links">
+    <a href="index.html">About</a>
+    <a href="education.html" class="active">Education</a>
+    <a href="achievements.html">Achievements</a>
+    <a href="family.html">Family</a>
+    <a href="citcs1d.html">CITCS 1D-B</a>
+  </div>
+  <button class="dark-toggle" onclick="toggleDarkMode()">🌓</button>
+</nav>
+<div class="main-content">
   <h1>Educational Attainment</h1>
-
-  <div class="card">
-    <img src="uc.png" class="logo">
-    <h2>University of the Cordilleras <span>(August 2025 - Present)</span></h2>
-    <p>Bachelor of Science in Computer Science</p>
-  </div>
-
-  <div class="card">
-    <img src="sti.png" class="logo">
-    <h2>STI College Baguio (2021–2023)</h2>
-    <p>Accountancy, Business, Management</p>
-  </div>
-
-  <div class="card">
-    <img src="bcnhs.png" class="logo">
-    <h2>Baguio City National High School (2017–2021)</h2>
-    <p></p>
-  </div>
-
-  <div class="card">
-    <img src="mabini.png" class="logo">
-    <h2>Apolinario Mabini Elementary School (2011–2017)</h2>
-    <p></p>
-  </div>
-
-  <div class="button-row">
-    <a class="nav-btn" href="index.html">PREVIOUS</a>
-    <a class="nav-btn" href="achievements.html">NEXT</a>
+  <div class="container">
+    <div class="card">
+      <img src="uc.png" class="logo" alt="UC Logo">
+      <h2>University of the Cordilleras <span>(August 2025 - Present)</span></h2>
+      <p>Bachelor of Science in Computer Science</p>
+    </div>
+    <div class="card">
+      <img src="sti.png" class="logo" alt="STI Logo">
+      <h2>STI College Baguio <span>(2021–2023)</span></h2>
+      <p>Accountancy, Business, Management</p>
+    </div>
+    <div class="card">
+      <img src="bcnhs.png" class="logo" alt="BCNHS Logo">
+      <h2>Baguio City National High School <span>(2017–2021)</span></h2>
+      <p></p>
+    </div>
+    <div class="card">
+      <img src="mabini.png" class="logo" alt="Mabini Logo">
+      <h2>Apolinario Mabini Elementary School <span>(2011–2017)</span></h2>
+      <p></p>
+    </div>
   </div>
 </div>
-
+<div class="button-container">
+  <a class="nav-btn" href="index.html"><i class="fas fa-arrow-left"></i> PREVIOUS</a>
+  <a class="nav-btn" href="achievements.html">NEXT <i class="fas fa-arrow-right"></i></a>
+</div>
 <script>
   function toggleDarkMode() {
     document.body.classList.toggle("dark-mode");
+    localStorage.setItem("darkMode", document.body.classList.contains("dark-mode"));
+  }
+  if (localStorage.getItem("darkMode") === "true") {
+    document.body.classList.add("dark-mode");
   }
 </script>
-
 </body>
 </html>
-
