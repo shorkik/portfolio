@@ -17,8 +17,6 @@
       --accent: #0070f3;
       --hover-accent: #005bb5;
       --gradient: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-      --pattern-light: url('data:image/svg+xml;utf8,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="2" height="100" fill="%23cccccc"/><rect x="0" y="0" width="100" height="2" fill="%23cccccc"/><circle cx="25" cy="25" r="2" fill="%23cccccc"/><circle cx="75" cy="75" r="2" fill="%23cccccc"/></svg>');
-      --pattern-dark: url('data:image/svg+xml;utf8,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="2" height="100" fill="%23333"/><rect x="0" y="0" width="100" height="2" fill="%23333"/><circle cx="25" cy="25" r="2" fill="%23333"/><circle cx="75" cy="75" r="2" fill="%23333"/></svg>');
     }
     * {
       margin: 0;
@@ -31,312 +29,240 @@
     }
     body {
       font-family: 'Roboto', sans-serif;
-      background: var(--bg-light) var(--pattern-light);
-      background-size: 150px 150px;
+      background: var(--bg-light);
       color: var(--text-light);
       transition: all 0.4s ease;
       display: flex;
       flex-direction: column;
     }
     body.dark-mode {
-      background: var(--bg-dark) var(--pattern-dark);
+      background: var(--bg-dark);
       color: var(--text-dark);
     }
-    .navbar {
-      height: 60px;
-      flex-shrink: 0;
-      background: var(--card-light);
-      padding: 0 30px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-      border-bottom: 3px solid var(--accent);
-      transition: all 0.4s ease;
+
+    /* TITLE AT TOP */
+    .title-bar {
+      width: 100%;
+      padding: 30px 40px;
+      text-align: center;
+      background: var(--gradient);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     }
-    body.dark-mode .navbar {
-      background: var(--card-dark);
-      border-bottom: 3px solid var(--accent);
-    }
-    .nav-links {
-      display: flex;
-      gap: 25px;
-      align-items: center;
-    }
-    .nav-links a {
-      color: var(--text-light);
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s;
-      font-size: 1rem;
-      white-space: nowrap;
-    }
-    body.dark-mode .nav-links a {
-      color: var(--text-dark);
-    }
-    .nav-links a:hover {
-      color: var(--accent);
-    }
-    .nav-links a.active {
-      color: var(--accent);
-      font-weight: 700;
-    }
-    .dark-toggle {
-      background: var(--accent);
+    .title-bar h1 {
       color: #fff;
-      border: none;
-      padding: 10px 18px;
-      border-radius: 50px;
-      cursor: pointer;
-      transition: all 0.3s;
-      font-size: 1.2rem;
+      font-size: 2.8rem;
+      margin-bottom: 8px;
+      font-weight: 700;
+      letter-spacing: 1px;
     }
-    .dark-toggle:hover {
-      background: var(--hover-accent);
-      transform: scale(1.05);
+    .title-bar p {
+      color: rgba(255,255,255,0.95);
+      font-size: 1.4rem;
+      font-weight: 500;
+      letter-spacing: 0.5px;
     }
-    .main-content {
+
+    /* MAIN CONTENT AREA */
+    .main-container {
       flex: 1;
       display: flex;
-      min-height: 0;
-      position: relative;
-    }
-    .container {
-      display: flex;
-      width: 100%;
-      height: 100%;
-      transition: background 0.4s;
       overflow: hidden;
-      position: relative;
     }
-    .left {
+
+    /* LEFT SIDE - PICTURE 50% */
+    .picture-side {
       width: 50%;
-      height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
+      background: #f8f9fa;
       padding: 0;
-      background: #000;
-    }
-    .class-photo {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.3s;
-    }
-    .class-photo:hover {
-      transform: scale(1.02);
-    }
-    .right {
-      width: 50%;
-      height: 100%;
-      padding: 50px 40px 100px 40px;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: center;
-      overflow-y: auto;
-      overflow-x: hidden;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       position: relative;
+      overflow: hidden;
     }
-    body.dark-mode .right {
-      background: linear-gradient(135deg, #1a1d29 0%, #2d1b4e 100%);
+    body.dark-mode .picture-side {
+      background: #1a1a1a;
     }
-    .right::before {
+    
+    /* Photo frame effect */
+    .picture-side::after {
       content: '';
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
       bottom: 0;
-      background: url('data:image/svg+xml;utf8,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="60" cy="60" r="3" fill="rgba(255,255,255,0.08)"/><circle cx="80" cy="30" r="1.5" fill="rgba(255,255,255,0.1)"/></svg>');
-      background-size: 200px 200px;
-      opacity: 0.4;
+      box-shadow: inset 0 0 30px rgba(0,0,0,0.1);
       pointer-events: none;
     }
-    .right::-webkit-scrollbar {
-      width: 8px;
+    
+    .class-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 40% center;
+      filter: brightness(1.05) contrast(1.05);
     }
-    .right::-webkit-scrollbar-track {
-      background: rgba(255,255,255,0.1);
+
+    /* RIGHT SIDE - NAMES 50% */
+    .names-side {
+      width: 50%;
+      background: var(--card-light);
+      padding: 50px 60px;
+      overflow-y: auto;
+      border-left: 3px solid var(--accent);
+      box-shadow: -5px 0 20px rgba(0,0,0,0.05);
     }
-    .right::-webkit-scrollbar-thumb {
-      background: rgba(255,255,255,0.3);
+    body.dark-mode .names-side {
+      background: var(--card-dark);
+      box-shadow: -5px 0 20px rgba(0,0,0,0.3);
+    }
+    .names-side::-webkit-scrollbar {
+      width: 10px;
+    }
+    .names-side::-webkit-scrollbar-track {
+      background: rgba(0,0,0,0.05);
+    }
+    .names-side::-webkit-scrollbar-thumb {
+      background: var(--accent);
       border-radius: 10px;
     }
-    .right::-webkit-scrollbar-thumb:hover {
-      background: rgba(255,255,255,0.5);
+    .names-side::-webkit-scrollbar-thumb:hover {
+      background: var(--hover-accent);
     }
-    .right h2 {
-      color: #fff;
-      font-size: 2.5rem;
-      margin-bottom: 30px;
-      text-align: center;
-      width: 100%;
-      text-shadow: 0 3px 10px rgba(0,0,0,0.3);
-      position: relative;
-      z-index: 1;
+
+    .name-row {
+      margin-bottom: 35px;
+      padding: 20px;
+      background: rgba(0, 112, 243, 0.03);
+      border-radius: 12px;
+      border-left: 4px solid var(--accent);
+      transition: all 0.3s ease;
     }
-    .right p {
-      font-size: 1.1rem;
-      line-height: 2;
-      margin-bottom: 25px;
-      color: rgba(255,255,255,0.95);
-      text-align: left;
-      text-shadow: 0 2px 5px rgba(0,0,0,0.2);
-      position: relative;
-      z-index: 1;
+    .name-row:hover {
+      background: rgba(0, 112, 243, 0.08);
+      transform: translateX(5px);
     }
+    body.dark-mode .name-row {
+      background: rgba(0, 112, 243, 0.08);
+    }
+    body.dark-mode .name-row:hover {
+      background: rgba(0, 112, 243, 0.15);
+    }
+    
+    .name-row h3 {
+      color: var(--accent);
+      font-size: 1.35rem;
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--accent);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .name-row p {
+      color: var(--text-light);
+      font-size: 1.05rem;
+      line-height: 1.9;
+      letter-spacing: 0.3px;
+    }
+    body.dark-mode .name-row p {
+      color: var(--text-dark);
+    }
+
+    /* BUTTONS */
     .button-container {
-      position: absolute;
-      bottom: 30px;
-      right: 30px;
+      position: fixed;
+      bottom: 35px;
+      right: 35px;
       display: flex;
-      gap: 15px;
-      z-index: 10;
+      gap: 18px;
+      z-index: 100;
     }
     .nav-btn {
-      padding: 16px 35px;
-      font-size: 16px;
+      padding: 16px 32px;
+      font-size: 15px;
       font-weight: 700;
       background: var(--gradient);
       color: #fff;
       text-decoration: none;
-      border-radius: 10px;
+      border-radius: 12px;
       transition: all 0.3s;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      white-space: nowrap;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      font-size: 14px;
     }
     .nav-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      transform: translateY(-4px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     }
-    @keyframes fadeInLeft {
-      from {
-        opacity: 0;
-        transform: translateX(-20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
+    .nav-btn:active {
+      transform: translateY(-2px);
     }
-    @keyframes fadeInRight {
-      from {
-        opacity: 0;
-        transform: translateX(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    .left {
-      animation: fadeInLeft 0.7s ease forwards;
-    }
-    .right {
-      animation: fadeInRight 0.7s ease forwards;
-      animation-delay: 0.15s;
-      opacity: 0;
-    }
-    .button-container {
-      animation: fadeInUp 0.7s ease forwards;
-      animation-delay: 0.3s;
-      opacity: 0;
-    }
-    @media (max-height: 700px) {
-      .navbar {
-        height: 55px;
-      }
-      .right {
-        padding: 30px 30px 90px 30px;
-      }
-      .right h2 {
-        font-size: 2rem;
-      }
-      .right p {
-        font-size: 1rem;
-      }
-      .nav-btn {
-        padding: 12px 25px;
-        font-size: 14px;
-      }
-    }
+
     @media (max-width: 968px) {
-      .container {
+      .main-container {
         flex-direction: column;
       }
-      .left, .right {
+      .picture-side, .names-side {
         width: 100%;
       }
-      .left {
+      .picture-side {
         height: 50%;
       }
-      .right {
-        height: 50%;
-        padding: 30px 30px 90px 30px;
+      .names-side {
+        border-left: none;
+        border-top: 2px solid var(--accent);
       }
     }
   </style>
 </head>
 <body>
-<nav class="navbar">
-  <div class="nav-links">
-    <a href="index.html">About</a>
-    <a href="education.html">Education</a>
-    <a href="achievements.html">Achievements</a>
-    <a href="family.html">Family</a>
-    <a href="citcs1d.html" class="active">CITCS 1D-B</a>
-  </div>
-  <button class="dark-toggle" onclick="toggleDarkMode()">🌓</button>
-</nav>
-<div class="main-content">
-  <div class="container">
-    <div class="left">
-      <img src="class-photo.jpg" alt="CITCS 1D - B Class Photo" class="class-photo">
-    </div>
-    <div class="right">
-      <h2>Oh 10</h2>
-      <p>
-        Eduardo Bembo Jr., Asher Dan Oro, Daniel John Romeo Imson, 
-        Aban Clynette, Jaelyndrea Gabayne, Samantha Nicole Dasalla, 
-        Nahshon Louis Mina, Kenjie Lhord Kimmakim, James Joaquin Celeste, 
-        Achilles Juaquin De Guzman, Zairene Lloyd Acierto, Bryle Angelo Angat, 
-        Jaebe Uriel Chicay
-      </p>
-      <p>
-        Emmanuel Larga, Jeremy Domilies, Janine Oyod, Hannah Mae Sumayo, 
-        Ronan Agoot, Keith Dinamling, Mc Jesu Caponpon, Professor Felipe A. Pati Jr., PhD, Mgmt, 
-        Zhaira Nicole Taduan, Nelson Cayabyab II, Joshua Jared Tabilin, 
-        Adrian Mark Varona, Ky Ruvie Allatiw
-      </p>
-      <p>
-        Samuel Sagandoy, Charles David Ticwala, Ericson Aspiras, 
-        Jynuz Knixon Mahinay, Manny Vic Salazar, Boaz Gabriel Ong, 
-        Zeiyah Grazielle Laroya, Christopher Anthony Juevesano, 
-        Bernie Keith Domerez, Nathaniel Paway
-      </p>
-    </div>
-    <div class="button-container">
-      <a class="nav-btn" href="family.html"><i class="fas fa-arrow-left"></i> PREVIOUS</a>
-      <a class="nav-btn" href="index.html"><i class="fas fa-home"></i> HOME</a>
-    </div>
-  </div>
+
+<!-- TITLE AT TOP -->
+<div class="title-bar">
+  <h1>Batch 010 SY. 2025-2026</h1>
+  <p>CITCS 1D - B</p>
 </div>
+
+<!-- MAIN CONTAINER -->
+<div class="main-container">
+  
+  <!-- LEFT 50% - PICTURE -->
+  <div class="picture-side">
+    <img src="class-photo.jpg" alt="CITCS 1D-B Class Photo" class="class-photo">
+  </div>
+
+  <!-- RIGHT 50% - NAMES -->
+  <div class="names-side">
+    <div class="name-row">
+      <h3>Row 1 (Left to Right)</h3>
+      <p>Eduardo Bembo Jr., Asher Dan Oro, Daniel John Romeo Imson, Aban Clynette, Jaelyndrea Gabayne, Samantha Nicole Dasalla, Nahshon Louis Mina, Kenjie Lhord Kimmakim, James Joaquin Celeste, Achilles Juaquin De Guzman, Zairene Lloyd Acierto, Bryle Angelo Angat, Jaebe Uriel Chicay</p>
+    </div>
+
+    <div class="name-row">
+      <h3>Row 2 (Left to Right)</h3>
+      <p>Emmanuel Larga, Jeremy Domilies, Janine Oyod, Hannah Mae Sumayo, Ronan Agoot, Keith Dinamling, Mc Jesu Caponpon, Professor Felipe A. Pati Jr PhD Mgmt, Zhaira Nicole Taduan, Nelson Cayabyab II, Joshua Jared Tabilin, Adrian Mark Varona, Ky Ruvie Allatiw</p>
+    </div>
+
+    <div class="name-row">
+      <h3>Row 3 (Left to Right)</h3>
+      <p>Samuel Sagandoy, Charles David Ticwala, Ericson Aspiras, Jynuz Knixon Mahinay, Manny Vic Salazar, Boaz Gabriel Ong, Zeiyah Grazielle Laroya, Christopher Anthony Juevesano, Bernie Keith Domerez, Nathaniel Paway</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- NAVIGATION BUTTONS -->
+<div class="button-container">
+  <a class="nav-btn" href="family.html"><i class="fas fa-arrow-left"></i> PREVIOUS</a>
+  <a class="nav-btn" href="index.html"><i class="fas fa-home"></i> HOME</a>
+</div>
+
 <script>
   function toggleDarkMode() {
     document.body.classList.toggle("dark-mode");
@@ -346,5 +272,6 @@
     document.body.classList.add("dark-mode");
   }
 </script>
+
 </body>
 </html>
