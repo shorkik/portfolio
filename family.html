@@ -29,70 +29,67 @@
       height: 100vh;
       overflow: hidden;
     }
+
+    /* PRELOADER */
+    #preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--gradient);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+    #preloader.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+    .loader {
+      width: 60px;
+      height: 60px;
+      border: 5px solid rgba(255,255,255,0.3);
+      border-top: 5px solid #fff;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
     body {
       font-family: 'Roboto', sans-serif;
       background: var(--bg-light) var(--pattern-light);
       background-size: 150px 150px;
+      background-attachment: fixed;
       color: var(--text-light);
       transition: all 0.4s ease;
       display: flex;
       flex-direction: column;
     }
-    body.dark-mode {
-      background: var(--bg-dark) var(--pattern-dark);
-      color: var(--text-dark);
+
+    /* PAGE TRANSITION */
+    .page-transition {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--gradient);
+      z-index: 9998;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.4s ease, visibility 0.4s ease;
     }
-    .navbar {
-      height: 60px;
-      flex-shrink: 0;
-      background: var(--card-light);
-      padding: 0 30px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      transition: all 0.4s ease;
+    .page-transition.active {
+      opacity: 1;
+      visibility: visible;
     }
-    body.dark-mode .navbar {
-      background: var(--card-dark);
-    }
-    .nav-links {
-      display: flex;
-      gap: 25px;
-      align-items: center;
-    }
-    .nav-links a {
-      color: var(--text-light);
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s;
-      font-size: 1rem;
-      white-space: nowrap;
-    }
-    body.dark-mode .nav-links a {
-      color: var(--text-dark);
-    }
-    .nav-links a:hover {
-      color: var(--accent);
-    }
-    .nav-links a.active {
-      color: var(--accent);
-      font-weight: 700;
-    }
-    .dark-toggle {
-      background: var(--accent);
-      color: #fff;
-      border: none;
-      padding: 10px 18px;
-      border-radius: 50px;
-      cursor: pointer;
-      transition: all 0.3s;
-      font-size: 1.2rem;
-    }
-    .dark-toggle:hover {
-      background: var(--hover-accent);
-      transform: scale(1.05);
-    }
+
     .main-content {
       flex: 1;
       display: flex;
@@ -103,6 +100,7 @@
       min-height: 0;
       position: relative;
     }
+
     h1 {
       text-align: center;
       color: var(--accent);
@@ -110,6 +108,7 @@
       margin-bottom: 40px;
       text-shadow: 0 3px 6px rgba(0,0,0,0.15);
     }
+
     .container {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -119,49 +118,143 @@
       flex: 1;
       min-height: 0;
     }
+
     .card {
       background: var(--card-light);
       border-radius: 20px;
       padding: 40px 35px;
       box-shadow: 0 8px 30px rgba(0,0,0,0.12);
-      transition: transform 0.3s, box-shadow 0.3s;
+      transition: all 0.5s ease;
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
       overflow: hidden;
+      opacity: 0;
+      transform: translateY(50px);
+      position: relative;
     }
-    body.dark-mode .card {
-      background: var(--card-dark);
+
+    .card.reveal {
+      opacity: 1;
+      transform: translateY(0);
     }
+
     .card:hover {
-      transform: translateY(-8px);
+      transform: translateY(-8px) scale(1.03);
       box-shadow: 0 15px 40px rgba(0,0,0,0.25);
     }
+
+    /* HEART ICON */
+    .heart-icon {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, #ff6b9d 0%, #c06c84 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: heartbeat 1.5s ease-in-out infinite;
+      box-shadow: 0 5px 15px rgba(255, 107, 157, 0.4);
+      z-index: 100;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% {
+        transform: scale(1);
+      }
+      10%, 30% {
+        transform: scale(1.1);
+      }
+      20%, 40% {
+        transform: scale(1);
+      }
+    }
+
+    .heart-icon i {
+      color: #fff;
+      font-size: 1.5rem;
+    }
+
     .family-photo {
       width: 100%;
       height: 280px;
       object-fit: cover;
       border-radius: 15px;
       margin-bottom: 25px;
-      transition: transform 0.3s;
+      transition: all 0.5s ease;
+      opacity: 0;
+      transform: scale(0.8);
     }
+
+    .family-photo.loaded {
+      opacity: 1;
+      transform: scale(1);
+    }
+
     .card:hover .family-photo {
-      transform: scale(1.05);
+      transform: scale(1.05) rotate(2deg);
     }
+
     .card h2 {
       color: var(--accent);
       font-size: 1.8rem;
       margin-bottom: 20px;
     }
+
     .card p {
       font-size: 1.15rem;
       color: var(--text-light);
       line-height: 1.7;
     }
-    body.dark-mode .card p {
-      color: var(--text-dark);
+
+    /* SPARKLE EFFECT */
+    .sparkle {
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      background: #ffd700;
+      border-radius: 50%;
+      opacity: 0;
+      animation: sparkle-animation 2s infinite;
     }
+
+    .card:hover .sparkle {
+      animation: sparkle-animation 1s infinite;
+    }
+
+    @keyframes sparkle-animation {
+      0%, 100% {
+        opacity: 0;
+        transform: scale(0);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .sparkle:nth-child(1) {
+      top: 15%;
+      left: 15%;
+      animation-delay: 0s;
+    }
+
+    .sparkle:nth-child(2) {
+      top: 25%;
+      right: 20%;
+      animation-delay: 0.3s;
+    }
+
+    .sparkle:nth-child(3) {
+      bottom: 35%;
+      left: 25%;
+      animation-delay: 0.6s;
+    }
+
     .button-container {
       position: fixed;
       bottom: 30px;
@@ -189,35 +282,29 @@
       transform: translateY(-3px);
       box-shadow: 0 8px 20px rgba(0,0,0,0.3);
     }
+
     @keyframes fadeInUp {
       from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(30px);
       }
       to {
         opacity: 1;
         transform: translateY(0);
       }
     }
+
     h1 {
       animation: fadeInUp 0.5s ease forwards;
     }
-    .card {
-      animation: fadeInUp 0.7s ease forwards;
-      opacity: 0;
-    }
-    .card:nth-child(1) { animation-delay: 0.1s; }
-    .card:nth-child(2) { animation-delay: 0.15s; }
-    .card:nth-child(3) { animation-delay: 0.2s; }
+
     .button-container {
-      animation: fadeInUp 0.7s ease forwards;
-      animation-delay: 0.25s;
+      animation: fadeInUp 0.8s ease forwards;
+      animation-delay: 0.3s;
       opacity: 0;
     }
+
     @media (max-height: 700px) {
-      .navbar {
-        height: 55px;
-      }
       h1 {
         font-size: 2.2rem;
         margin-bottom: 30px;
@@ -242,6 +329,7 @@
         font-size: 14px;
       }
     }
+
     @media (max-width: 968px) {
       .container {
         grid-template-columns: 1fr;
@@ -251,48 +339,94 @@
   </style>
 </head>
 <body>
-<nav class="navbar">
-  <div class="nav-links">
-    <a href="index.html">About</a>
-    <a href="education.html">Education</a>
-    <a href="achievements.html">Achievements</a>
-    <a href="family.html" class="active">Family</a>
-    <a href="citcs1d.html">CITCS 1D-B</a>
-  </div>
-  <button class="dark-toggle" onclick="toggleDarkMode()">🌓</button>
-</nav>
+
+<!-- PRELOADER -->
+<div id="preloader">
+  <div class="loader"></div>
+</div>
+
+<!-- PAGE TRANSITION -->
+<div class="page-transition"></div>
+
 <div class="main-content">
   <h1>Family</h1>
+
   <div class="container">
     <div class="card">
-      <img src="mom.png" class="family-photo" alt="Marissa Navarro">
+      <div class="heart-icon">
+        <i class="fas fa-heart"></i>
+      </div>
+      <div class="sparkle"></div>
+      <div class="sparkle"></div>
+      <div class="sparkle"></div>
+      <img src="mom.png" class="family-photo loading" alt="Marissa Navarro" onload="this.classList.add('loaded')">
       <h2>Marissa Navarro</h2>
       <p>This is my mom, a single parent who raised me and my sister alone. I am always thankful for her love and for being our strongest support.</p>
     </div>
+
     <div class="card">
-      <img src="dad.png" class="family-photo" alt="Victor Sumayo Jr.">
+      <div class="heart-icon">
+        <i class="fas fa-heart"></i>
+      </div>
+      <div class="sparkle"></div>
+      <div class="sparkle"></div>
+      <div class="sparkle"></div>
+      <img src="dad.png" class="family-photo loading" alt="Victor Sumayo Jr." onload="this.classList.add('loaded')">
       <h2>Victor Sumayo Jr.</h2>
       <p>Although my father wasn't present throughout my life, I'm still thankful that he gave me life.</p>
     </div>
+
     <div class="card">
-      <img src="sibling.png" class="family-photo" alt="Rovic Red Navarro">
+      <div class="heart-icon">
+        <i class="fas fa-heart"></i>
+      </div>
+      <div class="sparkle"></div>
+      <div class="sparkle"></div>
+      <div class="sparkle"></div>
+      <img src="sibling.png" class="family-photo loading" alt="Rovic Red Navarro" onload="this.classList.add('loaded')">
       <h2>Rovic Red Navarro</h2>
       <p>My sister and I have always been close. She is my shoulder to cry on, and she supports me in everything.</p>
     </div>
   </div>
 </div>
+
 <div class="button-container">
-  <a class="nav-btn" href="achievements.html"><i class="fas fa-arrow-left"></i> PREVIOUS</a>
-  <a class="nav-btn" href="citcs1d.html">NEXT <i class="fas fa-arrow-right"></i></a>
+  <a class="nav-btn" href="achievements.html" onclick="pageTransition(event, 'achievements.html')"><i class="fas fa-arrow-left"></i> PREVIOUS</a>
+  <a class="nav-btn" href="citcs1d.html" onclick="pageTransition(event, 'citcs1d.html')">NEXT <i class="fas fa-arrow-right"></i></a>
 </div>
+
 <script>
-  function toggleDarkMode() {
-    document.body.classList.toggle("dark-mode");
-    localStorage.setItem("darkMode", document.body.classList.contains("dark-mode"));
+  // PRELOADER - Faster
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.getElementById('preloader').classList.add('hidden');
+    }, 500);
+  });
+
+  // PAGE TRANSITION
+  function pageTransition(event, url) {
+    event.preventDefault();
+    const transition = document.querySelector('.page-transition');
+    transition.classList.add('active');
+    setTimeout(() => {
+      window.location.href = url;
+    }, 400);
   }
-  if (localStorage.getItem("darkMode") === "true") {
-    document.body.classList.add("dark-mode");
+
+  // SCROLL REVEAL FOR CARDS
+  function revealCards() {
+    const cards = document.querySelectorAll('.card');
+    cards.forEach((card, index) => {
+      setTimeout(() => {
+        card.classList.add('reveal');
+      }, index * 150);
+    });
   }
+
+  window.addEventListener('load', () => {
+    setTimeout(revealCards, 600);
+  });
 </script>
+
 </body>
 </html>
